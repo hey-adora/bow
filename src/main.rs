@@ -305,6 +305,9 @@ pub mod editor {
             }
 
             fn cleanup(&mut self) -> anyhow::Result<()> {
+                disable_raw_mode()?;
+                self.stdout.queue(LeaveAlternateScreen)?;
+                self.stdout.flush()?;
                 Ok(())
             }
         }
